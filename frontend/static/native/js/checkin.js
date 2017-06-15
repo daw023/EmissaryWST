@@ -18,7 +18,9 @@ $(document).ready(function(){
     $('#tap-to-check').on('click', startCheckIn);
     $('.check-in').on('submit', submitForm);
 
-    //When a user starts their check in
+    /**
+	* Page when user begins to check in
+	*/
     function startCheckIn(){
         $('.check-in').addClass('show');
         $('.check-in').animate({
@@ -29,7 +31,9 @@ $(document).ready(function(){
         $('#clock').addClass('hide');
     }
 
-    //When a patient submits their form
+    /**
+	* When a patient submits their form, slack message notification
+	*/
     function submitForm(){
         //event.preventDefault();
         var data = grabFormElements();
@@ -53,7 +57,10 @@ $(document).ready(function(){
         },0);
 
     }
-    //Grabs elements from the check in and puts it into an object
+    
+	/**
+	* Takes elements from the check in form and puts them into an object
+	*/
     function grabFormElements(){
         var newVisitor = {};
         newVisitor.company_id = companyData._id;
@@ -64,7 +71,9 @@ $(document).ready(function(){
         return newVisitor;
     }
 
-    //CLOCK
+    /*
+	* Updates the check-in clock
+	*/
     function updateClock () {
         var currentTime = new Date ( );
         var currentHours = currentTime.getHours ( );

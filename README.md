@@ -6,6 +6,7 @@ https://team1-emissary.herokuapp.com/
 ### Staging site here:
 https://cse112-1-staging.herokuapp.com/
 
+
 ## 1. Getting Started
 **Emissary is a visitor check-in SaaS application targetted for small businesses.**
 - Sign up your company and your own personal account for your company. 

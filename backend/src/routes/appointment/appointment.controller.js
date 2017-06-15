@@ -21,6 +21,12 @@ var Text = require('../../notification/text');
 /****** Company TEMPLATE ROUTES ******/
 module.exports.template = {};
 
+/**
+* Creates a new appointment for a visitor
+* @param {Object} req - a request object that contains a visitor's information which includes
+*						a visitor's first name, last name, phone number, appointment date, company visiting id, and provider name
+* @param {Object} res - a response object that either returns an error message or saves the visitor's appointment
+*/
 module.exports.template.create = function(req, res) {
     var appointment = new Appointment();
     var param = req.body;
@@ -39,25 +45,30 @@ module.exports.template.create = function(req, res) {
             company_id:param.company_id,
             date:param.date
         }, function(err, appointments){
-            if(err) return res.status(400).json({error: "Could Not Find"});
+            if(err) {console.log("could not find"); return res.status(400).json({error: "Could Not Find"})};
             if(appointments.length==0) {
                 appointment.save(function (err, a) {
 
-                    console.log(err);
-
-                    if (err)
-                        return res.status(400).json({error: "Could Not Save"});
-
-
-
+                    if (err) {
+                      console.log("could not save");
+                      return res.status(400).json({error: "Could Not Save"});
+                    }
+                    console.log("should send 200")
                     return res.status(200).json(a);
                 });
             }else{
+                console.log("already created")
                 return res.status(400).json({error: "Already Created"});
             }
         });
 };
 
+
+/**
+* Gets all of the company's scheduled appointments
+* @param req - a request object that contains the company's id
+* @param res - a response object that either returns an error message or returns the list of scheduled appointments
+*/
 module.exports.template.getAll = function(req, res) {
     Appointment.find({company_id: req.params.id}, function(err, result){
             if(err){
@@ -67,6 +78,12 @@ module.exports.template.getAll = function(req, res) {
         });
 };
 
+
+/**
+* Gets an appointment by its appointment id
+* @param req - a request object that contains the appointment's id
+* @param res - a response object that either returns an error message or returns the list of scheduled appointments
+*/
 module.exports.template.get = function(req, res) {
     Appointment.findOne({_id: req.params.id}, function(err, a) {
         if(err || !a)
@@ -75,6 +92,11 @@ module.exports.template.get = function(req, res) {
     });
 };
 
+/**
+* Updates a visitor's appointment
+* @param req - a request object that contains an appointment's id
+* @param res - a response object that either returns an error message or updates the appointment
+*/
 module.exports.template.update = function(req, res){
     Appointment.findOne({_id: req.params.id}, function (err, a) {
         if(err || !a)
@@ -103,14 +125,22 @@ module.exports.template.update = function(req, res){
     });
 };
 
+/**
+* Deletes a visitor's appointment
+* @param req - a request object that contains the appointment's id
+* @param res - a response object that either returns an error message or deletes the appointment
+*/
 module.exports.template.delete = function(req, res){
     Appointment.findById(req.params.id, function(err, a) {
-        if(err)
-            res.status(400).json({error: "Could Not Find"});
+        if(err) {
+            console.log("Could not find")
+            return res.status(400).json({error: "Could Not Find"});
+        }
         a.remove(function(err) {
             if(err) {
-                res.status(400).json({error: "Could Not Save"});
+                return res.status(400).json({error: "Could Not Save"});
             } else {
+                console.log("remove succesful")
                 return res.status(200).json(a);
             }
         });

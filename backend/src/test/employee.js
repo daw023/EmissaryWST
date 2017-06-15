@@ -36,7 +36,7 @@ describe("Employee", function() {
                         .post('/api/employees')
                         .query({email: credentials.email, token: credentials.token})
                         .send({
-                            company_id: credentials.admin._id,
+                            company_name: "test",
                             first_name: "John",
                             last_name: "Smith",
                             email: "jt@tomcruise.com",
@@ -143,31 +143,6 @@ describe("Employee", function() {
                             res.body.should.have.property('email').and.be.equal("updated_email@tomcruise.com");
                             res.body.should.have.property('phone_number').and.be.equal("987654321");
                             res.body.should.not.have.property('password');
-                            done();
-                        });
-                });
-            });
-
-            // TEST GET ALL EMPLOYEES
-            describe('GET /api/employees/company/:id', function(){
-                it("should return all employees", function(done){
-
-                    request(url)
-                        .get('/api/employees/company/'+credentials.admin._id)
-                        .send({
-                            _admin_id: credentials.admin._id
-                        })
-                        .end(function(err, res){
-
-                            //console.log("RESPONSE", res)
-                            res.body.should.be.instanceof(Object);
-                            //res.body.should.not.be.empty;
-                            res.body.should.not.be.empty();
-                            //res.body.should.exist;
-                            should.exist(res.body);
-                            res.body.should.have.length.of(1);
-                            res.body.should.be.an.instanceof(Array);
-                            res.body[0].should.not.have.property('password');
                             done();
                         });
                 });

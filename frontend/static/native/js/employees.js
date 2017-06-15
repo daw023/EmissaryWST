@@ -19,7 +19,6 @@ $(document).ready(function(){
     
    /***
      * Makes a get request to display list of employees 
-     * @param none
      * @returns displays the employee list
      */
     function getEmployees() {
@@ -40,7 +39,6 @@ $(document).ready(function(){
 
    /***
      * Makes a post request to update list of employees when adding a new employee
-     * @param none
      * @returns updates the employee list
      */
    function updateEmployeeList(obj) {
@@ -59,7 +57,6 @@ $(document).ready(function(){
 
      /***
      * When a patient submits their form
-     * @param none
      * @returns updates the employee list
      */
     function submitForm(){
@@ -72,7 +69,6 @@ $(document).ready(function(){
 
     /***
      * Grabs elements from the check in and puts it into an object
-     * @param none
      * @returns new employee object
      */
     function grabFormElements(){

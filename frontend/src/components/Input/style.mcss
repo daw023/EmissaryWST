@@ -1,0 +1,40 @@
+.outsideContainer {
+    border: 1px solid #DBDBDB;
+    width: 100% !important;
+    position: relative;
+}
+.icon {
+    position: absolute !important;
+    right: 11px;
+    top: 10px;
+}
+.error {}
+.outsideContainer.error {
+    border: 1px solid #FF6C58;
+}
+.errorMessage {
+    width: 100%;
+    color: #FF6C58;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 4px 0 0 0;
+}
+.inputContainer {
+    margin-right: 40px;
+}
+.noIcon {}
+.inputContainer.noIcon {
+    margin-right: 0;
+}
+.input {
+    width: 100%;
+    background-size: 16px 18px;
+    font-size: 19px !important;
+    line-height: 24px !important;
+    color: #484848;
+    padding: 11px !important;
+    border: none;
+}
+.input:focus {
+    outline: none;
+}

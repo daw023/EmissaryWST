@@ -9,6 +9,12 @@ var stripe = require("stripe")(
   "sk_test_dqzYJJ6xWGgg6U1hgQr3hNye"
 ); // TODO: do i need to do this for every js file that uses stripe?
 
+
+/**
+* Creates a subscription plan for a company
+* @param req - a request object that contains the company's stripe token and email
+* @param res - a response object that either returns an error message or creates the subscription
+*/
 exports.createSubscription = function(req, res){
 	// create customer, TODO: could there be an existing stripe customer ID?
 	stripe.customers.create({ // calls stripe customer create
@@ -25,6 +31,12 @@ exports.createSubscription = function(req, res){
 	});
 };
 
+/**
+* Gets the company's subscription plan
+* @param req - a request object that contains the company's id
+* @param res - a response object that either returns an error message or returns the company's subscription if it have one
+*
+*/
 exports.getSubscription = function(req, res){
 	Company.findOne({_id: req.params.id}, function (err, result){
 		var stripeCustomerID = result.stripeCustomerID;
@@ -43,6 +55,9 @@ exports.getSubscription = function(req, res){
 
 }
 
+/**
+* Checks whether a company is subscriped to a basic plan by going through an array and checking if the id matches
+*/
 function basicPlanIndex(arr){
 	var arrLength = arr.length;
 	for(var i = 0; i < arrLength; i++){

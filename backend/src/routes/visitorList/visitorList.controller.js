@@ -10,6 +10,12 @@ var Employee = require('../../models/Employee');
 var Appointment = require('../../models/Appointment');
 
 /* handles route for getting the Company's visitor list */
+
+/**
+* Gets visitor list of a company
+* @param req - a request object that contains the company's id
+* @param res - a response object that either returns an error message or creates one if null or returns the visitor list of a company
+*/
 exports.getCompanyVisitorListReq = function(req, res){
     var company_id=req.params.id;
     exports.getCompanyVisitorList(company_id, function(err_msg, result){
@@ -29,6 +35,11 @@ exports.getCompanyVisitorListReq = function(req, res){
 
 
 /* logic for getting the Company's visitor list */
+/**
+* Gets visitor list of a company
+* @param req - a request object that contains the company's id
+* @param res - a response object that either returns an error message or creates one if null or returns the visitor list of a company
+*/
 exports.getCompanyVisitorList = function(company_id, callback){
     if(!company_id)
         return callback({error: "Please send company id."}, null);
@@ -47,6 +58,11 @@ exports.getCompanyVisitorList = function(company_id, callback){
 }
 
 /* handles route to delete visitor in the list*/
+/**
+* Deletes a visitor from a company's visitor list
+* @param req - a request object that contains the company's id and visitor id
+* @param res - a response object that either returns an error message or deletes the visitor from the visitor list
+*/
 exports.deleteVisitorReq = function(req, res){
     var visitor_id=req.params.visitor_id;
     var company_id=req.params.company_id;
@@ -57,6 +73,11 @@ exports.deleteVisitorReq = function(req, res){
 }
 
 /* logic for deleting the visitor in the list */
+/**
+* Deletes a visitor from a company's visitor list
+* @param req - a request object that contains the company's id and visitor id
+* @param res - a response object that either returns an error message or deletes the visitor from the visitor list
+*/
 exports.deleteVisitor = function(company_id, visitor_id, callback){
     if(!company_id)
         return callback({error: "Please send company id."}, null);
@@ -72,6 +93,11 @@ exports.deleteVisitor = function(company_id, visitor_id, callback){
 }
 
 /* clear the list */
+/**
+* Clears the entire visitor list
+* @param req - a request object that contains the list id
+* @param res - a response object that either returns an error message or clears the entire list
+*/
 exports.deleteReq = function(req, res){
     var list_id=req.params.id;
     exports.delete(list_id, function(err_msg, result){
@@ -80,6 +106,11 @@ exports.deleteReq = function(req, res){
     });
 }
 
+/**
+* Clears the entire visitor list
+* @param req - a request object that contains the list id
+* @param res - a response object that either returns an error message or clears the entire list
+*/
 exports.delete = function(list_id, callback){
     if(!list_id)
         return callback({error: "Please send list id."}, null);
@@ -93,6 +124,11 @@ exports.delete = function(list_id, callback){
     });
 }
 // This route will be called when a visitor checks in
+/**
+* Create a visitor when the visitor checks into the system
+* @param req - a request object that contains the visitor checkin form information
+* @param res - a response object that either returns an error message or creates a visitor
+*/
 exports.createReq = function(req, res) {
     exports.create(req.body, function(err_msg, result){
         if(err_msg)  return res.status(400).json(err_msg);
@@ -100,6 +136,12 @@ exports.createReq = function(req, res) {
     });
 }
 
+/**
+* Create a visitor when the visitor checks into the system
+* @param req - a request object that contains the visitor checkin form information, company id, visitor's first name
+*			   last name, phone number, check in time and additional information
+* @param res - a response object that either returns an error message or creates a visitor
+*/
 exports.create = function(param, callback){
     //required fields
     var company_id = param.company_id;

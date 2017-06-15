@@ -76,12 +76,12 @@ describe('Appointment Test', function() {
             .post('/api/appointments')
             .send(
                 {
-                    first_name: new_first_name,
-                    last_name: new_last_name,
-                    phone_number: new_phone_number,
-                    date: new_date,
+                    first_name: first_name,
+                    last_name: last_name,
+                    phone_number: phone_number,
+                    date: date,
                     company_id: currCompany._id,
-                    provider_name: new_provider_name
+                    provider_name: provider_name
                 }
             )
             .expect(400)

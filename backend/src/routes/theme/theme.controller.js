@@ -24,6 +24,12 @@ module.exports.template.use = function(req, res, next) {
     next();
 };
 
+/**
+* Creates a default form theme
+* @param req - a request object that contains the comapny's or the user's id
+* @param res - a response object that either returns an error message or returns created the form's theme
+*
+*/
 module.exports.template.create = function(req, res) {
     var theme = new Theme();
     theme.user_id = req.params.user_id; //company or user id
@@ -43,6 +49,12 @@ module.exports.template.create = function(req, res) {
 
 };
 
+/**
+* Gets the form's theme
+* @param req - a request object that contains the company's or user's  id
+* @param res - a response object that either returns an error message or returns the form's theme
+*
+*/
 module.exports.template.get = function(req, res) {
     Theme.findOne({
         user_id: req.params.user_id
@@ -54,6 +66,12 @@ module.exports.template.get = function(req, res) {
     });
 };
 
+/**
+* Updates the form's theme
+* @param req - a request object that contains the company's or the user's id
+* @param res - a response object that either returns an error message or updates the form's theme if it is changed
+*
+*/
 module.exports.template.update = function(req, res) {
 
     Theme.findOne({
@@ -87,6 +105,13 @@ module.exports.template.update = function(req, res) {
     });
 };
 
+
+/**
+* Deletes the form's theme
+* @param req - a request object that contains the company's or the user's id
+* @param res - a response object that either returns an error message or deletes the form's theme
+*
+*/
 module.exports.template.delete = function(req, res) {
 
     Theme.remove({

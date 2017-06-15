@@ -10,7 +10,7 @@ $(function() {
 });
 
 
-// with Button named signin-bt
+// with Button named logout button
 $(function() {
    $('#logoutButton').click(function() {
        localStorage.removeItem('userState');

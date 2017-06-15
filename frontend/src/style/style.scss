@@ -1,0 +1,807 @@
+/**
+ * @author Anthony Altieri on 6/4/17.
+ */
+
+// Dimensions
+$desktop: "(min-width: 1128px)";
+$tablet: "(min-width: 768px) and (max-width: 1127px)";
+$mobile: "(max-width: 767px)";
+$largeHeader: "(min-width: 1001px)";
+$smallHeader: "(max-width: 1000px)";
+
+// Colors -- Put your color pallet here
+/* [THEORY]
+ * The pallet is made up of a few key components, you got your branding in
+ * three colors: primary - the major brand color, secondary - a complement
+ * that sort of contrasts the primary, bright - a color that is meant to
+ * heavily contrast the other two to make things pop
+ */
+$c_primary: #33FFCC;
+$c_secondary: #4496FF;
+$c_bright: #E87162;
+$c_dark: #5F5E5D;
+$c_backgroundLight: #F2EEEA;
+$c_darkGrey: #484848;
+$c_grey: #767676;
+$c_lightGrey: #DBDBDB;
+$c_lightlightGrey: #f5f5f5;
+$c_secondaryText: rgba(0,0,0,0.4);
+$c_cardBackground: #FCF7FF;
+$c_light: #F4F7F9;
+$c_error: #FF5C58;
+$c_green: #43A047;
+
+// Fonts
+$f_brand: 'Bree Serif', serif;
+
+.disappear {
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+}
+
+.absoluteFill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently */
+}
+
+.noOverflow {
+  overflow: hidden !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.relative {
+  position: relative !important;
+}
+
+.absoluteMiddle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.fullwidth {
+  width: 100% !important;
+}
+.fullheight {
+  height: 100% !important;
+}
+
+.brandFont {
+  font-family: $f_brand;
+}
+
+.r {
+  display: flex !important;
+  flex-flow: row !important;
+  align-items: center;
+}
+.r.center {
+  justify-content: center !important;
+}
+.r.left {
+  justify-content: flex-start !important;
+}
+.r.right {
+  justify-content: flex-end !important;
+}
+.r.between {
+  justify-content: space-between !important;
+}
+.r.around {
+  justify-content: space-around !important;
+}
+.r.top {
+  align-items: flex-start !important;
+}
+.r.wrap {
+  flex-wrap: wrap !important;
+}
+
+
+.c {
+  display: flex !important;
+  flex-flow: column !important;
+  align-items: center;
+}
+.c.center {
+  justify-content: center !important;
+}
+.c.top {
+  justify-content: flex-start !important;
+}
+.c.bottom {
+  justify-content: flex-end !important;
+}
+.c.around {
+  justify-content: space-around !important;
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.link {
+  color: #4FB4B9;
+}
+a {
+  @extend .link;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+  /* Set your content font stack here: */
+  font-family: "Lato", "sans-serif";
+}
+
+* {
+  box-sizing: border-box;
+  font-family:  "Lato", "sans-serif";
+}
+
+
+.fullscreen {
+  @extend .fullwidth, .fullheight;
+}
+
+html {
+  @extend .fullscreen;
+
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @extend .fullscreen;
+}
+
+#root {
+  @extend .fullscreen;
+}
+
+.text {
+  letter-spacing: 0.2px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  display: inline !important;
+}
+
+$HEADER_HEIGHT: 72px;
+$SMALL_HEADER_HEIGHT: 42px;
+.header {
+  width: 100%;
+  height: $HEADER_HEIGHT;
+  margin: 0;
+  background-color: $c_backgroundLight !important;
+  padding: 0 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  .container {
+    height: inherit;
+    display: flex !important;
+    flex-flow: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  $LOGO_WIDTH: 72px;
+  $LOGO_MOBILE_WIDTH: 54px;
+  .brandLogo {
+    width: $LOGO_WIDTH;
+    height: $LOGO_WIDTH;
+    cursor: pointer;
+    @media #{$mobile} {
+      width: $LOGO_MOBILE_WIDTH;
+      height: $LOGO_MOBILE_WIDTH;
+    }
+  }
+
+  .brand {
+    font-family: $f_brand;
+    font-size: 54px;
+    margin: 0 8px 0 8px;
+    color: #5F5E5D;
+    display: inline-block;
+    position: relative;
+    bottom: 4px;
+    cursor: pointer;
+    @media #{$mobile} {
+      font-size: 38px;
+    }
+  }
+  .brand.small {
+    font-size: 32px;
+    bottom: 2px;
+  }
+  #container {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  .buttons {
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+  .button {
+    height: 100% !important;
+    display: inline-block;
+    margin: 0 12px;
+    @media #{$smallHeader} {
+      padding: 0 !important;
+      margin: 0 !important;
+      display: none !important;
+      z-index: -1;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  }
+  #hamburger {
+    @media #{$largeHeader} {
+      display: none !important;
+    }
+  }
+  #hamburgerIcon {
+    font-size: 32px !important;
+    @media #{$largeHeader} {
+      display: none !important;
+    }
+  }
+}
+.header.small {
+  height: $SMALL_HEADER_HEIGHT;
+}
+.headerOverlayButton {
+
+}
+.headerOverlayButton:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.stage {
+  padding-top: $HEADER_HEIGHT;
+  background-color: $c_light;
+  @extend .fullscreen;
+}
+.paddingHeader {
+  padding-top: $HEADER_HEIGHT !important;
+}
+
+.greyFrame {
+  background-color: $c_lightlightGrey;
+  padding: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.defaultPictureContainer {
+  width: 140px;
+  height: 140px;
+  justify-content: center;
+  align-items: center;
+  @extend .c;
+}
+.defaultPictureUsername {
+  font-size: 82px;
+  color: #ffffff;
+  @extend .noselect;
+}
+.accountText {
+  font-size: 32px;
+  color: $c_dark;
+}
+.accountName {
+  font-family: "Lato", "sans-serif";
+  color: $c_dark;
+  font-size: 32px;
+  margin: 12px 0 0 0;
+}
+.accountLabel {
+  font-family: "Lato", "sans-serif";
+  color: $c_dark;
+  font-size: 28px;
+}
+.accountInfo {
+  font-family: "Lato", "sans-serif";
+  color: $c_dark;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 12px;
+}
+.accountInfoSection {
+  padding: 28px;
+  border-bottom: 24px solid $c_lightlightGrey;
+  background-color: #ffffff;
+}
+.lightlightGreyBackground {
+  width: 100%;
+  height: 100%;
+  background-color: $c_lightlightGrey;
+}
+
+.overlay {
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  background-color: rgba(0,0,0,0.74902);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.overlayCard{
+  z-index: 15 !important;
+  padding: 52px 32px 32px 32px !important;
+  width: 90vw;
+  max-width: 568px;
+  max-height: 90vh;
+  #x {
+    font-size: 32px !important;
+  }
+}
+
+// Dividers
+.orLineContainer {
+  overflow: hidden !important;
+  text-align: center !important;
+  margin: 16px 0 16px 0;
+}
+.orLineTextContainer {
+  position: relative !important;
+  padding: 16px !important;
+}
+.orLineTextContainer::before{
+  content: '' !important;
+  position: absolute !important;
+  border-bottom: 1px solid #e4e4e4 !important;
+  top: 50% !important;
+  right: 100% !important;
+  width: 5000px !important;
+}
+.orLineTextContainer::after {
+  content: '' !important;
+  position: absolute !important;
+  border-bottom: 1px solid #e4e4e4 !important;
+  top: 50% !important;
+  left: 100% !important;
+  width: 5000px !important;
+}
+.orLineText {
+  font-weight: normal !important;
+  color: #767676 !important;
+  margin: 0 !important;
+  word-wrap: break-word !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+  @extend .text;
+}
+.lineContainer {
+  margin: 16px 0 !important;
+}
+.line {
+  border-bottom: 1px solid $c_lightGrey !important;
+}
+
+
+.textInputBoxOutsideContainer {
+  border: 1px solid $c_lightGrey;
+  width: 100% !important;
+  position: relative;
+  .icon {
+    position: absolute !important;
+    right: 11px;
+    top: 10px
+  }
+}
+.textInputBoxErrorMessage {
+  color: $c_error;
+  font-weight: bold;
+  width: 100%;
+  font-size: 14px;
+  margin: 4px 0 0 0;
+}
+.textInputBoxOutsideContainer.error {
+  border: 1px solid $c_error !important;
+}
+.textInputBoxContainer {
+  margin-right: 40px;
+}
+.textInputBoxContainer.noIcon {
+  margin-right: 0px;
+}
+.textInputBox {
+  width: 100%;
+  background-size: 16px 18px;
+  font-size: 19px !important;
+  line-height: 24px !important;
+  color: $c_darkGrey;
+  padding: 11px !important;
+  border: none;
+}
+.textInputBox:focus {
+  outline: none;
+}
+
+// Welcome
+.emissaryWelcome {
+  text-align: center;
+  font-size: 82px;
+  font-weight: 300;
+}
+.emissaryWhoAreYou {
+  text-align: center;
+  font-size: 52px;
+  font-weight: 400;
+  color: $c_secondaryText;
+  margin-bottom: 12px;
+}
+.emissaryWhoAreYouHint {
+  margin: 12px 0;
+  text-align: center;
+  color: $c_secondaryText;
+}
+
+.userTypeCard {
+  padding: 12px 32px;
+  margin: 12px 82px;
+  p {
+    font-size: 28px;
+    text-align: center;
+  }
+  @extend .clickable;
+}
+
+// CheckIn
+.checkIn {
+  margin: 0;
+  overflow: hidden;
+
+  h1 {
+    text-align: center;
+    font-size: 100px;
+    font-weight: 400;
+    color: #333;
+    display: inline-block;
+    margin: 0;
+    padding: 12px 32px;
+  }
+
+  .glass {
+    margin-top: 22px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .backContainer {
+    position: absolute !important;
+    top: 12px;
+    left: 24px;
+    p {
+      position: relative;
+      bottom: 1px;
+      font-size: 18px;
+      margin: 0;
+      color: $c_darkGrey;
+      font-weight: 500;
+    }
+    @extend .r, .clickable;
+  }
+  .back {
+    font-size: 48px !important;
+  }
+
+  .exit {
+    position: absolute !important;
+    top: 12px;
+    left: 24px;
+    font-size: 48px !important;
+    transition: rotate 1s ease;
+    @extend .clickable;
+  }
+  .exit:hover {
+    transform: rotate(90deg)
+  }
+
+  .timeContainer {
+    padding: 22px 32px;
+    .datetime {
+      text-align: center;
+      margin: 4px 0;
+      font-size: 82px;
+      color: #333;
+    }
+  }
+
+  .checkInButton {
+    padding: 12px 32px;
+    .icon {
+      font-size: 120px !important;
+    }
+    p {
+      text-align: center;
+      font-size: 32px;
+      margin: 0;
+    }
+    @extend .clickable;
+  }
+
+  $FORM_CONTAINER_WIDTH: 70%;
+  .formContainer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: (100 - $FORM_CONTAINER_WIDTH) / 2;
+    right: (100 - $FORM_CONTAINER_WIDTH) / 2;
+    padding-top: 82px;
+    padding-bottom: 82px;
+    overflow-y: auto;
+  }
+  .formCard {
+    padding: 22px 32px;
+
+    .inputContainer:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+
+  @extend .fullscreen;
+}
+#granim-canvas {
+  position: fixed;
+  @extend .fullscreen;
+}
+
+
+// Employees
+$SECTION_HEADER_HEIGHT: 52px;
+.sectionHeader {
+  width: 100%;
+  height: $SECTION_HEADER_HEIGHT;
+  background-color: $c_lightGrey !important;
+  position: relative;
+  bottom: $SECTION_HEADER_HEIGHT;
+  transition: bottom 1s ease;
+  .text {
+    font-size: 42px;
+    font-weight: 300;
+    padding: 0 16px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  @extend .r.center;
+}
+.sectionHeader.showing {
+  bottom: 0;
+}
+
+.settingsForms {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+$TABLE_CONTAINER_WIDTH: 90%;
+.tableContainer {
+  margin-left: (100 - $TABLE_CONTAINER_WIDTH) / 2;
+  margin-right: (100 - $TABLE_CONTAINER_WIDTH) / 2;
+  width: $TABLE_CONTAINER_WIDTH;
+  position: absolute;
+  top: 142px;
+  bottom: 18px;
+}
+.tableContainer.withFab {
+  bottom: 72px;
+}
+
+// Signup
+.signupStepLabel {
+  font-size: 20px;
+}
+.signupStep {
+  font-weight: 600;
+}
+
+// Landing
+$LANDING_FOOTER_HEIGHT: 52px;
+.landing {
+  background-color: $c_backgroundLight;
+  position: relative;
+
+  .imageWrapper {
+    height: 100%;
+    overflow: hidden;
+    img {
+      height: 100%;
+      filter: blur(3px);
+    }
+  }
+  .content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .brandContainer {
+    width: 100vw;
+    height: 100vh;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 78px;
+      width: 368px;
+      @media #{$mobile} {
+        width: 100%;
+        left: 0;
+      }
+    }
+    @extend .c, .c.center;
+  }
+  .brandWrapper {
+    height: 64vh;
+    width: 526px;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    bottom: $LANDING_FOOTER_HEIGHT;
+    @media #{$mobile} {
+      max-width: 386px;
+      width: 90%;
+    }
+  }
+  .brand {
+    width: 100%;
+    text-align: center;
+    font-family: $f_brand;
+    font-size: 106px;
+    margin: 0;
+    color: #5F5E5D;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    @media #{$mobile} {
+      font-size: 62px;
+    }
+  }
+
+  @extend .fullscreen;
+}
+.landingFooter {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  left: 0;
+  height: $LANDING_FOOTER_HEIGHT;
+
+  .button {
+    transform: scale(2);
+    @media #{$tablet} {
+      transform: scale(1.5);
+    }
+  }
+
+  @extend .r, .r.around;
+}
+.featuresHeader {
+  width: 100%;
+  text-align: center;
+  font-size: 64px;
+  font-weight: 300;
+  color: $c_dark;
+  margin: 0;
+  position: relative;
+  bottom: 8px;
+  @media #{$mobile} {
+    font-size: 37px;
+  }
+}
+.featureIcon {
+  height: 200px;
+  color: $c_dark !important;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  bottom: 14px;
+  @media #{$mobile} {
+    height: 144px;
+  }
+}
+.featuresContent {
+  font-size: 22px;
+  margin: 20px 0 20px 0;
+  line-height: 160%;
+  position: relative;
+  bottom: 8px;
+  @media #{$mobile} {
+    font-size: 16px;
+  }
+}
+.featureStep {
+  font-size: 18px;
+  @media #{$mobile} {
+    font-size: 12px;
+  }
+}
+
+.priceBoxContainer {
+  .price {
+    width: 100%;
+    font-size: 18px;
+    margin: 0;
+    text-align: right;
+  }
+  .money {
+    margin: 4px 0;
+    font-size: 42px;
+    font-weight: 600;
+    color: $c_green;
+  }
+}
+.priceBox {
+  border: solid $c_secondary 2px;
+  border-radius: 3px;
+
+  li {
+    font-size: 22px;
+    font-weight: 400;
+    color: $c_dark;
+  }
+  li:not(last-child) {
+    margin-bottom: 8px;
+  }
+
+}
+.priceHeader {
+  width: 100%;
+  background-color: $c_secondary;
+  color: white;
+  margin: 0;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 28px;
+}

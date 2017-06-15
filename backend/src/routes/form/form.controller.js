@@ -1,6 +1,7 @@
 'use strict';
 
-/* This module is meant to house all of the API
+/** 
+ * This module is meant to house all of the API
  * routes that pertain to forms
  */
 var express = require('express');
@@ -13,6 +14,11 @@ var TemplateForm = require('../../models/form/FormTemplate');
 /********** FORM TEMPLATE ROUTES **********/
 module.exports.template = {};
 
+/**
+* Find a company's form template by its company id
+* @param req - a request object that contains the company's id
+* @param res - a response object that either returns an error message or returns the company's form template
+*/
 module.exports.template.findByCompanyId =  function(req, res) {
   TemplateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
     if(err)
@@ -22,6 +28,12 @@ module.exports.template.findByCompanyId =  function(req, res) {
   });
 };
 
+/**
+* Find a company's form template by its admin id
+* @param req - a request object that contains the admin's id
+* @param res - a response object that either returns an error message or returns the company's form template
+*
+*/
 module.exports.template.findByAdminId = function(req,res){
   TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
     if(err)
@@ -31,6 +43,11 @@ module.exports.template.findByAdminId = function(req,res){
   });
 };
 
+/**
+* Creates or updates a company's form template
+* @param req - a request object that contains its admin's id
+* @param res - a response object that either returns an error message or creates a form template or updates it
+*/
 module.exports.template.sendByAdminId = function(req,res){
   TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
     if(err)
@@ -44,6 +61,12 @@ module.exports.template.sendByAdminId = function(req,res){
   });
 };
 
+/**
+* Creates a form template
+* @param req - a request object that contains its admin's id
+* @param res - a response object that either returns an error message or creates the form template
+*
+*/
 function createWithAdminId(req,res){
   var newTemplate = new TemplateForm();
   newTemplate._admin_id = req.params.adminid;
@@ -57,6 +80,13 @@ function createWithAdminId(req,res){
   });
 }
 
+
+/**
+* Updates the form template
+* @param req - a request object that contains its admin's id
+* @param res - a response object that either returns an error message or updates the form template
+*
+*/
 function updateWithAdminId(req,res){
   var update = {template: req.body.template};
 
@@ -69,6 +99,11 @@ function updateWithAdminId(req,res){
     });
 }
 
+/**
+* Creates a form template
+* @param req - a request object that contains its admin id and the form template information
+* @param res - a response object that either returns an error message or create the form template
+*/
 module.exports.template.create =  function(req, res) {
   var newTemplate = new TemplateForm();
   newTemplate._admin_id = new mongoose.Types.ObjectId(req.body._admin_id);
@@ -84,6 +119,11 @@ module.exports.template.create =  function(req, res) {
 
 
 /* Accept PUT request at /form/template */
+/**
+* Updates the form template
+* @param req - a request object that contains the form template information and its id
+* @param res - a response object that either returns an error message or update the form template
+*/
 module.exports.template.update =  function(req, res) {
     var update = {template: req.body.template};
     var options = {new: true};
@@ -98,6 +138,11 @@ module.exports.template.update =  function(req, res) {
 };
 
 /* accept DELETE request at /form/template/:template_id */
+/**
+* Deletes a form template
+* @param req - a request object that contains the template's id
+* @param res - a response object that either returns an error message or deletes the form template
+*/
 module.exports.template.delete =  function (req, res) {
     /* Get id param from request */
     var templateID = req.params.template_id;
@@ -119,6 +164,12 @@ module.exports.template.delete =  function (req, res) {
 /********** PATIENT FORM ROUTES **********/
 module.exports.submitted_form = {};
 
+/**
+* Find's the visitor submitted form
+* @param req - a request object that contains the form's id
+* @param res - a response object that either returns an error message or returns visitor's submitted form
+*
+*/
 module.exports.submitted_form.findById = function(req, res) {
   SubmittedForm.findOne({ '_id': req.params.form_id }, function (err, submittedForm) {
     if (err) {
@@ -129,6 +180,12 @@ module.exports.submitted_form.findById = function(req, res) {
   });
 };
 
+/**
+* Creates a submitted form using the data that a visitor has input into it
+* @param req - a request object that contains the form, admin id, visitor's first name, last name, email, and date
+* @param res - a response object that either returns an error message or create a visitor submitted form
+*
+*/
 module.exports.submitted_form.create = function(req, res) {
   var form = new SubmittedForm();
   form.form = req.body.form;
@@ -145,6 +202,13 @@ module.exports.submitted_form.create = function(req, res) {
   });
 };
 
+
+/**
+* Retrieves a visitor's submitted form based on their name and or email
+* @param req - a request object that contains the visitor's first name, last name, and email
+* @param res - a response object that either returns an error message or returns the visitor's submitted form
+*
+*/
 module.exports.submitted_form.findByPatientInfo = function(req, res) {
   var query = {},
     firstName = req.query.firstName,
